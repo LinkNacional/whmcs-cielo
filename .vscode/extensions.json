@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "natizyskunk.sftp",
+        "wakatime.vscode-wakatime",
+        "mehedidracula.php-namespace-resolver",
+        "eamodio.gitlens",
+        "vivaxy.vscode-conventional-commits",
+        "ms-vscode-remote.remote-containers",
+        "yzhang.markdown-all-in-one",
+        "redhat.vscode-yaml",
+        "aswinkumar863.smarty-template-support",
+        "standard.vscode-standard"
+    ]
+}

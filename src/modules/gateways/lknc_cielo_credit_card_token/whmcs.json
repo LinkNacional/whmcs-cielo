@@ -1,0 +1,31 @@
+{
+    "schema": "1.0",
+    "type": "whmcs-gateways",
+    "name": "lknc_cielo_credit_card_token",
+    "license": "proprietary",
+    "category": "payments",
+    "description": {
+        "name": "Cielo Cartão de Crédito Tokenizado",
+        "tagline": "Para pagamentos com cartão de crédito tokenizado via Cielo.",
+        "long": "O módulo Cielo com cartão de crédito é um gateway de pagamentos de faturas para o WHMCS. A Link Nacional o desenvolveu para que ele funcione como uma opção definitiva para pagamentos de faturas por cartão de crédito no WHMCS. O módulo processa os pagamentos através da CIELO API 3.0.",
+        "features": [
+            "Reembolso total ou parcial via WHMCS",
+            "Suporte multi cartões do WHMCS",
+            "Pagamentos recorrente automático"
+        ]
+    },
+    "logo": {
+        "filename": "logo.png"
+    },
+    "support": {
+        "homepage": "https://www.linknacional.com.br/whmcs/gateways/cielo/cartao-de-credito/",
+        "support_url": "https://www.linknacional.com.br/suporte/",
+        "email": "ticket@linknacional.com"
+    },
+    "authors": [
+        {
+            "name": "Link Nacional",
+            "homepage": "https://www.linknacional.com.br/"
+        }
+    ]
+}

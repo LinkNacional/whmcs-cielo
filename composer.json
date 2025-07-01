@@ -1,0 +1,17 @@
+{
+    "name": "linknacional/whmcs-cielo-credit-card",
+    "description": "Para pagamentos com cartão de crédito via Cielo.",
+    "type": "project",
+    "license": "proprietary",
+    "require-dev": {
+        "phan/phan": "5.4.1"
+    },
+    "authors": [
+        {
+            "name": "Link Nacional",
+            "email": "ticket@linknacional.com.br"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
