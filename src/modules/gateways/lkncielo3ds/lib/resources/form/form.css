@@ -1,0 +1,12 @@
+.cardinalOverlay-content {
+  max-width: fit-content !important;
+  height: 100vh !important;
+}
+
+#Cardinal-ModalContent {
+  height: 100% !important;
+}
+
+#Cardinal-CCA-IFrame {
+  height: 100% !important;
+}

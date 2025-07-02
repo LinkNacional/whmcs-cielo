@@ -52,6 +52,6 @@ class WhmcsModuleUpdater
 
     public function getLatestVersion()
     {
-        return '2.9.0';
+        return '2.10.0';
     }
 }

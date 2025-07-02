@@ -1,7 +1,10 @@
-# 2.9.0 - 01/07/2024
+# 2.10.0 - 02/07/2025
+- Adição do método de pagamento 3DS.
+
+# 2.9.0 - 01/07/2025
 - Adição do método PIX da Cielo.
 
-# 2.8.0 - 01/07/2024
+# 2.8.0 - 01/07/2025
 - Mudanças para tornar o modulo em código aberto.
 
 # 2.7.2 - 12/03/2024

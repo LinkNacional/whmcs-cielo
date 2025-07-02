@@ -33,7 +33,7 @@ function lknc_cielo_credit_card_token_MetaData()
  */
 function lknc_cielo_credit_card_token_config($params)
 {
-    $moduleVersion = '2.9.0';
+    $moduleVersion = '2.10.0';
     $systemUrl = rtrim($params['systemurl'], '/');
 
     $smarty = new Smarty();

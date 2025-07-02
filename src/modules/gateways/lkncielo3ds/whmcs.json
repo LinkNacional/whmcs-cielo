@@ -1,0 +1,32 @@
+{
+    "schema": "1.0.0",
+    "type": "whmcs-gateways",
+    "name": "lkncielo3ds",
+    "license": "proprietary",
+    "category": "payments",
+    "description": {
+        "name": "Cielo 3DS Crédito e Débito",
+        "tagline": "Pagamento com cartão de crédito ou débito via Cielo 3DS.",
+        "long": "",
+        "features": [
+            "Pagamento com cartão de crédito e débito",
+            "Parcelamento em até 12 vezes",
+            "Reembolso total e parcial",
+            "Cálculo de taxas de transação",
+            "Pagamento parcial da fatura"
+        ]
+    },
+    "logo": {
+        "filename": "logo.png"
+    },
+    "support": {
+        "homepage": "https://www.linknacional.com.br/",
+        "email": "ticket@linknacional.com.br"
+    },
+    "authors": [
+        {
+            "name": "Link Nacional",
+            "homepage": "https://www.linknacional.com.br/"
+        }
+    ]
+}

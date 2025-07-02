@@ -34,7 +34,7 @@ jobs:
       uses: mathieudutour/github-tag-action@v6.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        custom_tag: "2.9.0"
+        custom_tag: "2.10.0"
 
     - name: Generate new release with encoded source code
       uses: ncipollo/release-action@v1
