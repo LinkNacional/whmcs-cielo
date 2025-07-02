@@ -119,7 +119,7 @@ function lknc_run_updates($params)
  */
 function lknc_cielo_credit_card_config($params)
 {
-    $moduleVersion = '2.9.0';
+    $moduleVersion = '2.10.0';
     lknc_run_updates($params);
 
     $saveCardModeDefault = $params['activateSaveCard'] === 'on' ? 'Opcional' : 'Desabilitado';
