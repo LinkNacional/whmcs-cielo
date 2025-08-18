@@ -4,21 +4,21 @@
  * This file handles the callback from the credit card payment gateway form.
  * It processes the credit card information and executes the payment.
  *
- * @link      https://github.com/LinkNacional/whmcs-cielo-credit-card
+ * @link      https://github.com/LinkNacional/whmcs-cielo
  * @author    Link Nacional <ticket@linknacional.com.br>
- * @author    Bruno Ferreira <ferreira.bruno@linknacional.com>
  * @since     1.0.0
  */
 
 // Require libraries needed for gateway module functions.
-require_once __DIR__ . '/../../../init.php';
-require_once __DIR__ . '/../../../includes/gatewayfunctions.php';
-require_once __DIR__ . '/../../../includes/invoicefunctions.php';
 
-require_once __DIR__ . '/../lknc_cielo_credit_card/helpers/gateway_functions.php';
-require_once __DIR__ . '/../lknc_cielo_credit_card/helpers/card_functions.php';
-require_once __DIR__ . '/../lknc_cielo_credit_card/helpers/fees_functions.php';
-require_once __DIR__ . '/../lknc_cielo_credit_card/helpers/validations.php';
+define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+require_once ROOTDIR . '/init.php';
+require_once ROOTDIR . '/includes/gatewayfunctions.php';
+require_once ROOTDIR . '/includes/invoicefunctions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/gateway_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/card_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/fees_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/validations.php';
 
 defined('WHMCS') or die('WHMCS not found');
 

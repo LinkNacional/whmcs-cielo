@@ -3,9 +3,10 @@
 $request = json_decode(file_get_contents('php://input'), true) ?? $_POST;
 !empty($request) or die('Action cannot be empty.');
 
-require_once __DIR__ . '/../../../init.php';
-require_once __DIR__ . '/../../../includes/gatewayfunctions.php';
-require_once __DIR__ . '/func/gateway_functions.php';
+define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+require_once ROOTDIR . '/init.php';
+require_once ROOTDIR . '/includes/gatewayfunctions.php';
+require_once ROOTDIR . '/modules/gateways/lkn_cielo_qr_code/func/gateway_functions.php';
 
 try {
     if (isset($request['invoiceId'])) {

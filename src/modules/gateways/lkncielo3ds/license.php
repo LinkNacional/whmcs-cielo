@@ -20,4 +20,6 @@ use WHMCS\Module\Gateway\lkncielo3ds\Helpers\Logger;
 function lkncielo3ds_check_license(): string|bool
 {
     return true;
+    define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+    require_once ROOTDIR . '/init.php';
 }

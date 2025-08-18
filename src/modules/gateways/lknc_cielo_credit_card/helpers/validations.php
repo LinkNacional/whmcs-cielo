@@ -1,6 +1,7 @@
 <?php
 
-require_once __DIR__ . '/gateway_functions.php';
+define('ROOTDIR', dirname(dirname(dirname(dirname(__FILE__)))));
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/gateway_functions.php';
 
 /**
  * @param string $expiration (m/y).

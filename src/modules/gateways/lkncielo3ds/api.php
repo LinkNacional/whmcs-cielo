@@ -8,9 +8,10 @@
  * @since 1.0.0
  */
 
-require_once __DIR__ . '/../../../init.php';
-require_once __DIR__ . '/../../../includes/gatewayfunctions.php';
-require_once __DIR__ . '/license.php';
+define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+require_once ROOTDIR . '/init.php';
+require_once ROOTDIR . '/includes/gatewayfunctions.php';
+require_once ROOTDIR . '/modules/gateways/lkncielo3ds/license.php';
 
 use WHMCS\Authentication\CurrentUser;
 use WHMCS\Module\Gateway\lkncielo3ds\Checkout\ApiController;

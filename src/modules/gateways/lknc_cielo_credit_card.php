@@ -7,9 +7,8 @@ use WHMCS\Database\Capsule;
  * This file is the main plugin file and has functions
  * for plugin configuration and form rendering.
  *
- * @link      https://github.com/LinkNacional/whmcs-cielo-credit-card
+ * @link      https://github.com/LinkNacional/whmcs-cielo
  * @author    Link Nacional <ticket@linknacional.com.br>
- * @author    Bruno Ferreira <ferreira.bruno@linknacional.com>
  * @since     1.0.0
  */
 
@@ -17,10 +16,11 @@ if (!defined('WHMCS')) {
     die('This file cannot be accessed directly');
 }
 
-require_once __DIR__ . '/../../includes/gatewayfunctions.php';
-require_once __DIR__ . '/lknc_cielo_credit_card/helpers/gateway_functions.php';
-require_once __DIR__ . '/lknc_cielo_credit_card/helpers/license_functions.php';
-require_once __DIR__ . '/lknc_cielo_credit_card/helpers/token_gateway_functions.php';
+define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+require_once ROOTDIR . '/includes/gatewayfunctions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/gateway_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/license_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/token_gateway_functions.php';
 
 /**
  * Define module related meta data.

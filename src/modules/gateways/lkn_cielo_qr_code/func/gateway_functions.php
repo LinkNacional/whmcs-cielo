@@ -1,9 +1,7 @@
 <?php
 /**
- * @link      https://github.com/LinkNacional/whmcs-cielo-qrcode
- * @link      https://developers.whmcs.com/payment-gateways/third-party-gateway/
+ * @link      https://github.com/LinkNacional/whmcs-cielo
  * @author    Link Nacional <ticket@linknacional.com.br>
- * @author    Bruno Ferreira <ferreira.bruno@linknacional.com>
  * @since     1.0.0
  */
 
@@ -135,7 +133,8 @@ function lkn_cielo_qr_code_format_amount_from_cielo_to_whmcs($cieloPaidAmount) {
 function lkn_cielo_qr_code_render_template($template, $data = []) {
     $smarty = new Smarty();
 
-    $path = __DIR__ . '/../templates/';
+    define('ROOTDIR', dirname(dirname(dirname(dirname(__FILE__)))));
+    $path = ROOTDIR . '/modules/gateways/lkn_cielo_qr_code/templates/';
     $smarty->setTemplateDir($path);
     $smarty->assign($data);
 

@@ -24,8 +24,9 @@ if (!defined('WHMCS')) {
     die('This file cannot be accessed directly');
 }
 
-require_once __DIR__ . '/lkncielo3ds/lib/utils/utils.php';
-require_once __DIR__ . '/lkncielo3ds/license.php';
+define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+require_once ROOTDIR . '/modules/gateways/lkncielo3ds/lib/utils/utils.php';
+require_once ROOTDIR . '/modules/gateways/lkncielo3ds/license.php';
 
 /**
  * Define module related meta data.

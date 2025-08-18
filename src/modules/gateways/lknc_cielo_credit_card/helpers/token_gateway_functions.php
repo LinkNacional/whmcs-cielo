@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @link      https://github.com/LinkNacional/whmcs-cielo-credit-card
+ * @link      https://github.com/LinkNacional/whmcs-cielo
  * @author    Link Nacional <ticket@linknacional.com.br>
- * @author    Bruno Ferreira <ferreira.bruno@linknacional.com>
  * @since     2.0.0
  */
 
-require_once __DIR__ . '/card_functions.php';
-require_once __DIR__ . '/gateway_functions.php';
+define('ROOTDIR', dirname(dirname(dirname(dirname(__FILE__)))));
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/card_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/gateway_functions.php';
 
 /**
  * Returns the name of the gateway.
