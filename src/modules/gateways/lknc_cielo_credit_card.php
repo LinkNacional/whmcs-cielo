@@ -1,6 +1,6 @@
 <?php
 
-use Smarty;
+//use Smarty;
 use WHMCS\Database\Capsule;
 
 /**

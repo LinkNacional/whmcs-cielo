@@ -5,7 +5,6 @@
  * @since     1.0.0
  */
 
-use Smarty;
 
 /**
  * @return string

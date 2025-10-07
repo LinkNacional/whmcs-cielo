@@ -1,7 +1,5 @@
 <?php
 
-use Smarty;
-
 add_hook('ClientAreaPageCreditCardCheckout', 1, function ($vars) {
     define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
     $templatesPath = ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/inc/templates';
