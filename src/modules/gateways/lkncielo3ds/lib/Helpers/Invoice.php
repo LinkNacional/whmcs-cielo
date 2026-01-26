@@ -98,8 +98,6 @@ final class Invoice
     }
 
     /**
-     * @see https://developers.whmcs.com/api-reference/getinvoice/
-     *
      * @since 1.1.0
      *
      * @param int $invoiceId
@@ -109,5 +107,77 @@ final class Invoice
     public static function get(int $invoiceId): array
     {
         return localAPI('GetInvoice', ['invoiceid' => $invoiceId]);
+    }
+
+    /**
+     * Checks if the invoice has reached the maximum number of payment attempts for 3DS.
+     *
+     * @param int $invoiceId
+     *
+     * @return bool
+     */
+    public static function hasReachedMaxAttempts3ds(int $invoiceId): bool
+    {
+        $maximumPaymentAttempts = Config::setting('maximumPaymentAttempts3ds') ?? 0;
+
+        if ($maximumPaymentAttempts === 0 || $maximumPaymentAttempts === '0') {
+            return false;
+        }
+
+        $invoiceTransactions = localAPI('GetTransactions', ['invoiceid' => $invoiceId]);
+
+        if (!isset($invoiceTransactions['transactions']['transaction'])) {
+            return false;
+        }
+
+        $transactions = $invoiceTransactions['transactions']['transaction'];
+
+        // Ensure it's an array
+        if (!is_array($transactions)) {
+            $transactions = [$transactions];
+        }
+
+        $gatewayName = Config::constant('name');
+        $invoiceTransactionsForGateway = array_filter($transactions, function ($transaction) use ($gatewayName) {
+            return $transaction['gateway'] === $gatewayName;
+        });
+
+        $invoiceTransactionsForGateway = array_reverse($invoiceTransactionsForGateway);
+
+        $invalidTransactions = 0;
+
+        for ($index = 0; $index < $maximumPaymentAttempts; $index++) {
+            if (!isset($invoiceTransactionsForGateway[$index])) {
+                break;
+            }
+
+            $transaction = $invoiceTransactionsForGateway[$index];
+            $transactionIdParts = explode('x', $transaction['transid']);
+
+            // Failed transactions have 'ERRO' in the transid
+            if (in_array('ERRO', $transactionIdParts)) {
+                $invalidTransactions++;
+            }
+        }
+
+        return $invalidTransactions >= $maximumPaymentAttempts;
+    }
+
+    /**
+     * Checks if the payment attempt should be blocked for 3DS.
+     *
+     * @param int $invoiceId
+     *
+     * @return bool
+     */
+    public static function mustBlockAttempt3ds(int $invoiceId): bool
+    {
+        if (self::hasReachedMaxAttempts3ds($invoiceId)) {
+            return true;
+        }
+
+        // Additional checks can be added here if needed
+
+        return false;
     }
 }

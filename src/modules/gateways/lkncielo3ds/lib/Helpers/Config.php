@@ -82,6 +82,8 @@ final class Config
             'calculate_brand_taxes' => (bool) $value,
             'enable_partial_payment' => (bool) $value,
             'enable_credit_card_installments' => (bool) $value,
+            'maximumPaymentAttempts3ds' => (int) $value,
+            'maxAttemptsReachedFeedback3ds' => trim($value),
             default => trim($value)
         };
     }

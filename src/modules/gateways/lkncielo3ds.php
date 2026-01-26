@@ -228,6 +228,22 @@ HTML
             'Default' => '50'
         ],
 
+        'maximumPaymentAttempts3ds' => [
+            'FriendlyName' => 'Limitador de pagamento 3DS',
+            'Type' => 'text',
+            'Size' => '12',
+            'Default' => '0',
+            'Description' => '0 para ilimitado, esta opção visa bloquear usuários maliciosos testando números de cartão.'
+        ],
+
+        'maxAttemptsReachedFeedback3ds' => [
+            'FriendlyName' => 'Mensagem para usuários bloqueados 3DS',
+            'Type' => 'textarea',
+            'Size' => '50',
+            'Default' => 'O meio de pagamento não esta mais disponível pois atingiu o limite de tentativas de pagamento.',
+            'Description' => 'Mensagem exibida na tela da fatura aos usuários que foram barrados pelo Limitador de pagamentos 3DS'
+        ],
+
         'calculate_brand_taxes' => [
             'FriendlyName' => 'Calcular taxas por bandeira e por parcelamento',
             'Type' => 'yesno',
@@ -269,6 +285,15 @@ function lkncielo3ds_link($params): string
             return View::render(
                 'form.form',
                 ['errorMsg' => $isLicenseValid]
+            );
+        }
+
+        // Check if payment attempts are blocked
+        if (\WHMCS\Module\Gateway\lkncielo3ds\Helpers\Invoice::mustBlockAttempt3ds($params['invoiceid'])) {
+            $maxAttemptsReachedFeedback = \WHMCS\Module\Gateway\lkncielo3ds\Helpers\Config::setting('maxAttemptsReachedFeedback3ds');
+            return View::render(
+                'form.form',
+                ['errorMsg' => $maxAttemptsReachedFeedback ?: 'O meio de pagamento não está mais disponível pois atingiu o limite de tentativas de pagamento.']
             );
         }
 

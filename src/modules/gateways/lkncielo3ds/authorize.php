@@ -19,8 +19,21 @@ use WHMCS\Module\Gateway\lkncielo3ds\Helpers\Config;
 use WHMCS\Module\Gateway\lkncielo3ds\Helpers\Formatter;
 use WHMCS\Module\Gateway\lkncielo3ds\Helpers\Logger;
 
+use WHMCS\Module\Gateway\lkncielo3ds\Helpers\Invoice;
+
 try {
     $request = Formatter::stripTagsArray(json_decode(file_get_contents('php://input'), true));
+
+    // Check if payment attempts are blocked
+    if (Invoice::mustBlockAttempt3ds($request['payment']['invoiceId'])) {
+        http_response_code(400);
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => false,
+            'reason' => 'attempts'
+        ]);
+        exit;
+    }
 
     if (
         !empty($request['address']['billing']['street1'])
