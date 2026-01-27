@@ -1,9 +1,8 @@
 <?php
 /**
- * @link      https://github.com/LinkNacional/whmcs-cielo-qrcode
+ * @link      https://github.com/LinkNacional/whmcs-cielo
  * @link      https://developers.whmcs.com/payment-gateways/third-party-gateway/
  * @author    Link Nacional <ticket@linknacional.com.br>
- * @author    Bruno Ferreira <ferreira.bruno@linknacional.com>
  * @since     1.0.0
  */
 
@@ -11,8 +10,9 @@ if (!defined('WHMCS')) {
     die('This file cannot be accessed directly');
 }
 
-require_once __DIR__ . '/lkn_cielo_qr_code/func/gateway_functions.php';
-require_once __DIR__ . '/lkn_cielo_qr_code/func/license_functions.php';
+define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+require_once ROOTDIR . '/modules/gateways/lkn_cielo_qr_code/func/gateway_functions.php';
+require_once ROOTDIR . '/modules/gateways/lkn_cielo_qr_code/func/license_functions.php';
 
 /**
  * Define module related meta data.

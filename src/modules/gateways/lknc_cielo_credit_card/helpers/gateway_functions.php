@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @link      https://github.com/LinkNacional/whmcs-cielo-credit-card
+ * @link      https://github.com/LinkNacional/whmcs-cielo
  * @author    Link Nacional <ticket@linknacional.com.br>
- * @author    Bruno Ferreira <ferreira.bruno@linknacional.com>
  * @since     2.0.0
  */
 
@@ -466,7 +465,8 @@ function lknc_cielo_credit_card_cielo_api_request($resource, $body = [], $httpMe
  */
 function lkn_cielo_credit_card_get_json_fees()
 {
-    $jsonFeesPath = __DIR__ . '/../inc/';
+    define('ROOTDIR', dirname(dirname(dirname(dirname(__FILE__)))));
+    $jsonFeesPath = ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/inc/';
     $customTaxesPath = $jsonFeesPath . 'custom_taxes.json';
 
     $jsonContent = file_exists($customTaxesPath)

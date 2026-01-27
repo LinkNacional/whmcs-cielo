@@ -1,9 +1,8 @@
 <?php
 
-use Smarty;
-
 add_hook('ClientAreaPageCreditCardCheckout', 1, function ($vars) {
-    $templatesPath = __DIR__ . '/../../modules/gateways/lknc_cielo_credit_card/inc/templates';
+    define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+    $templatesPath = ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/inc/templates';
     $invoiceBalance = $vars['invoice']['model']['balance'];
     $gatewayVariables = getGatewayVariables('lknc_cielo_credit_card');
 

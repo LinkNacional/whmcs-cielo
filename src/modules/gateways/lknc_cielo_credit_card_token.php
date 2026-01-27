@@ -4,14 +4,15 @@ if (!defined('WHMCS')) {
     die('This file cannot be accessed directly');
 }
 
-require_once __DIR__ . '/../../includes/gatewayfunctions.php';
-require_once __DIR__ . '/lknc_cielo_credit_card/helpers/gateway_functions.php';
-require_once __DIR__ . '/lknc_cielo_credit_card/helpers/token_gateway_functions.php';
-require_once __DIR__ . '/lknc_cielo_credit_card/helpers/card_functions.php';
-require_once __DIR__ . '/lknc_cielo_credit_card/helpers/fees_functions.php';
-require_once __DIR__ . '/lknc_cielo_credit_card/helpers/license_functions.php';
-require_once __DIR__ . '/lknc_cielo_credit_card/helpers/validations.php';
-require_once __DIR__ . '/callback/lknc_cielo_credit_card.php';
+define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+require_once ROOTDIR . '/includes/gatewayfunctions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/gateway_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/token_gateway_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/card_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/fees_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/license_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/validations.php';
+require_once ROOTDIR . '/modules/gateways/callback/lknc_cielo_credit_card.php';
 
 /**
  * @see https://developers.whmcs.com/payment-gateways/meta-data-params/
@@ -36,9 +37,10 @@ function lknc_cielo_credit_card_token_config($params)
     $moduleVersion = '2.10.0';
     $systemUrl = rtrim($params['systemurl'], '/');
 
+    require_once ROOTDIR . '/vendor/smarty/smarty/libs/Smarty.class.php';
     $smarty = new Smarty();
-
     $smarty->setTemplateDir(__DIR__ . '/lknc_cielo_credit_card/inc/templates/');
+    $smarty->setCompileDir('/www/wwwroot/cliente.linknacional.com.br/whmcs_template_c');
     $smarty->assign('moduleVersion', $moduleVersion);
     $smarty->assign('moduleUrl', "$systemUrl/modules/gateways/lknc_cielo_credit_card");
     $smarty->assign('moduleName', 'Cielo Cartão de Crédito Tokenizado');

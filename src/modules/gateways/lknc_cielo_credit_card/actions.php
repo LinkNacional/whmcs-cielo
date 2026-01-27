@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @link      https://github.com/LinkNacional/whmcs-cielo-credit-card
+ * @link      https://github.com/LinkNacional/whmcs-cielo
  * @author    Link Nacional <ticket@linknacional.com.br>
- * @author    Bruno Ferreira <ferreira.bruno@linknacional.com>
  * @since     2.0.0
  */
 
-require_once __DIR__ . '/../../../init.php';
+define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+require_once ROOTDIR . '/init.php';
 
 $request = json_decode(file_get_contents('php://input'), true) ?? $_POST;
 
@@ -15,9 +15,9 @@ if (empty($request) || !isset($request['action'])) {
     exit('No $resquest or $action');
 }
 
-require_once __DIR__ . '/helpers/gateway_functions.php';
-require_once __DIR__ . '/helpers/card_functions.php';
-require_once __DIR__ . '/../callback/lknc_cielo_credit_card.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/gateway_functions.php';
+require_once ROOTDIR . '/modules/gateways/lknc_cielo_credit_card/helpers/card_functions.php';
+require_once ROOTDIR . '/modules/gateways/callback/lknc_cielo_credit_card.php';
 
 header('Content-Type: application/json');
 
