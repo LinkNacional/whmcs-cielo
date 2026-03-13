@@ -268,7 +268,7 @@ final class AuthorizationService
                 $installmentValue = $paymentAmount / $this->request->installments;
                 $minInstallmentValue = Config::setting('min_installment_value');
 
-                if ($installmentValue < $minInstallmentValue) {
+                if ($this->request->installments > 1 && $installmentValue < $minInstallmentValue) {
                     $errors[] = 'Valor da parcela inválido.';
                 }
             }

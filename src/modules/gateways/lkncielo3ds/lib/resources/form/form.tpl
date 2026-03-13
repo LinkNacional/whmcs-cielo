@@ -287,18 +287,27 @@
                             name="installments"
                             required
                         >
-                            {for $parcelDivisor=1 to 12}
-                                {$parcelValue=($data->paymentAmount / $parcelDivisor)|string_format:"%.2f"}
+                            {if $data->paymentAmount < $data->minInstallmentValue}
+                                <option
+                                    selected
+                                    value="1"
+                                >
+                                    1 x R${$data->paymentAmount|string_format:"%.2f"|replace:'.':','} sem juros
+                                </option>
+                            {else}
+                                {for $parcelDivisor=1 to 12}
+                                    {$parcelValue=($data->paymentAmount / $parcelDivisor)|string_format:"%.2f"}
 
-                                {if $parcelValue >= $data->minInstallmentValue}
-                                    <option
-                                        {if $parcelDivisor === 1}selected{/if}
-                                        value="{$parcelDivisor}"
-                                    >
-                                        {$parcelDivisor} x R${$parcelValue|replace:'.':','} sem juros
-                                    </option>
-                                {/if}
-                            {/for}
+                                    {if $parcelValue >= $data->minInstallmentValue}
+                                        <option
+                                            {if $parcelDivisor === 1}selected{/if}
+                                            value="{$parcelDivisor}"
+                                        >
+                                            {$parcelDivisor} x R${$parcelValue|replace:'.':','} sem juros
+                                        </option>
+                                    {/if}
+                                {/for}
+                            {/if}
                         </select>
                     </div>
                 </div>
