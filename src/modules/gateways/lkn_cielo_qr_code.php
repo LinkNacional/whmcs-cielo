@@ -1,8 +1,9 @@
 <?php
 /**
- * @link      https://github.com/LinkNacional/whmcs-cielo
+ * @link      https://github.com/LinkNacional/whmcs-cielo-qrcode
  * @link      https://developers.whmcs.com/payment-gateways/third-party-gateway/
  * @author    Link Nacional <ticket@linknacional.com.br>
+ * @author    Bruno Ferreira <ferreira.bruno@linknacional.com>
  * @since     1.0.0
  */
 
@@ -189,72 +190,79 @@ function lkn_cielo_qr_code_link($params) {
 
         $qrCodeBase64 = $cieloResponse['Payment']['QrCodeBase64Image'];
 
-        $checkQrCodePayment = file_get_contents(__DIR__ . '/lkn_cielo_qr_code/assets/check_invoice_payment.js');
         $systemUrl = rtrim($params['systemurl'], '/');
 
         return <<<HTML
 <script type="text/javascript">
-  const invoiceId = $invoiceId
-  const systemUrl = '$systemUrl'
-  const checkerUrl = systemUrl + '/modules/gateways/lkn_cielo_qr_code/check_invoice_payment.php'
+(function() {
+    // A "bolha" da IIFE começa aqui. Nenhuma dessas variáveis vaza para o console global do navegador.
+    const invoiceId = {$invoiceId};
+    const systemUrl = '{$systemUrl}';
+    const checkerUrl = systemUrl + '/modules/gateways/lkn_cielo_qr_code/check_invoice_payment.php';
 
-  var qrCodeCheckTimeout = Function
-  let attemptsCount = 1
+    let qrCodeCheckTimeout;
+    let attemptsCount = 1;
 
-  const requestQrCodePaymentConfimration = () => {
-    if (attemptsCount === 5) {
-      clearInterval(qrCodeCheckTimeout)
-    }
-
-    const requestBody = {
-      invoiceId: invoiceId
-    }
-
-    fetch(checkerUrl, { method: 'POST', body: JSON.stringify(requestBody) })
-      .then(res => res.json())
-      .then(res => {
-        if (res.paid === true) {
-            window.location.reload()
-            clearInterval(qrCodeCheckTimeout)
-        } else {
-            attemptsCount++
+    const requestQrCodePaymentConfirmation = () => {
+        if (attemptsCount >= 5) {
+            clearInterval(qrCodeCheckTimeout);
         }
-      })
-      .catch(err => {
-        //
-      })
-    return false
-  }
 
-  // Checks after 1 minute
-  qrCodeCheckTimeout = setInterval(requestQrCodePaymentConfimration, 90000)
+        const requestBody = {
+            invoiceId: invoiceId
+        };
+
+        fetch(checkerUrl, { 
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody) 
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.paid === true) {
+                clearInterval(qrCodeCheckTimeout);
+                window.location.reload(); // Atualiza a página quando aprovado
+            } else {
+                attemptsCount++;
+            }
+        })
+        .catch(err => {
+            console.error('Erro ao verificar pagamento PIX/QR Code:', err);
+        });
+    };
+
+    // Inicia o cronômetro
+    qrCodeCheckTimeout = setInterval(requestQrCodePaymentConfirmation, 60000);
+
+})(); // A bolha se fecha e se auto-executa aqui
 </script>
+
 <div class="d-flex row justify-content-center align-items-center">
   <div class="d-flex justify-content-center align-items-center">
     <p class="text-center">
-      <i
-        class="fal fa-shield-check"
-        style="color: #22de54;"
-        title="Transação segura por certificado SSL 256bits"
-      ></i>
-      Pagamento seguro: PicPay, Mercado Pago, Cielo Pay, Banco do Brasil, Bradesco, AME, Banco Original, Next, AgiBank,
-      Payly, Bitfy, BANQI, Banestes, UZZO, Alyment, Moeda.
+      <i class="fal fa-shield-check" style="color: #22de54;" title="Transação segura por certificado SSL 256bits"></i>
+      Pagamento seguro: PicPay, Mercado Pago, Cielo Pay, Banco do Brasil, Bradesco, AME, Banco Original, Next, AgiBank, Payly, Bitfy, BANQI, Banestes, UZZO, Alyment, Moeda.
     </p>
   </div>
-  <img src="data:image/png;base64, {$qrCodeBase64}">
+  
+  <img src="data:image/png;base64, {$qrCodeBase64}" alt="QR Code Cielo" class="lkn-cielo-qrcode">
 
   <p>Confirmamos automaticamente em até 5 minutos.</p>
-  <style scoped>
-    img {
+  
+  <style>
+    .lkn-cielo-qrcode {
       width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      display: block;
       shape-rendering: geometricPrecision;
       image-rendering: optimizeQuality;
       text-rendering: optimizeLegibility;
     }
   </style>
-  </img>
 </div>
-
 HTML;
     }
 

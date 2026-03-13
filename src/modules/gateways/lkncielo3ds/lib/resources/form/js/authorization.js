@@ -613,6 +613,17 @@ function regenerateInstallments (amount) {
 
   const minInstallmentValue = parseFloat(fields.minInstallmentValue.value)
 
+  if (amount < minInstallmentValue) {
+    const option = document.createElement('option')
+
+    option.value = 1
+    option.textContent = `1 x ${currencyFormatter.format(amount)} sem juros`
+
+    fields.payment.installments.appendChild(option)
+
+    return
+  }
+
   for (let installment = 1; installment <= 12; installment++) {
     const installmentValue = amount / installment
 
