@@ -189,7 +189,6 @@ function lkn_cielo_qr_code_link($params) {
 
         $qrCodeBase64 = $cieloResponse['Payment']['QrCodeBase64Image'];
 
-        $checkQrCodePayment = file_get_contents(__DIR__ . '/lkn_cielo_qr_code/assets/check_invoice_payment.js');
         $systemUrl = rtrim($params['systemurl'], '/');
 
         return <<<HTML
