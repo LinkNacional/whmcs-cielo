@@ -40,7 +40,7 @@ function lknc_cielo_credit_card_token_config($params)
     require_once ROOTDIR . '/vendor/smarty/smarty/libs/Smarty.class.php';
     $smarty = new Smarty();
     $smarty->setTemplateDir(__DIR__ . '/lknc_cielo_credit_card/inc/templates/');
-    $smarty->setCompileDir('/www/wwwroot/cliente.linknacional.com.br/whmcs_template_c');
+    $smarty->setCompileDir($templates_compiledir);
     $smarty->assign('moduleVersion', $moduleVersion);
     $smarty->assign('moduleUrl', "$systemUrl/modules/gateways/lknc_cielo_credit_card");
     $smarty->assign('moduleName', 'Cielo Cartão de Crédito Tokenizado');
