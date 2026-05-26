@@ -6,7 +6,28 @@
  * @since     2.0.0
  */
 
-define('ROOTDIR', dirname(dirname(dirname(__FILE__))));
+$bootstrapDir = __DIR__;
+$rootDir = null;
+
+for ($i = 0; $i < 6; $i++) {
+    if (is_file($bootstrapDir . '/init.php')) {
+        $rootDir = $bootstrapDir;
+        break;
+    }
+
+    $bootstrapDir = dirname($bootstrapDir);
+}
+
+if ($rootDir === null) {
+    http_response_code(500);
+    error_log('Cielo module bootstrap error: init.php not found');
+    exit('Bootstrap error');
+}
+
+if (!defined('ROOTDIR')) {
+    define('ROOTDIR', $rootDir);
+}
+
 require_once ROOTDIR . '/init.php';
 
 $request = json_decode(file_get_contents('php://input'), true) ?? $_POST;
